@@ -1,0 +1,53 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-sm-8 col-md-8 booklist">
+            <div class="row">
+                <div *ngFor="let item of items; let i = index" class="book col-md-6 col-sm-6">
+                    <div class="pad">
+                        <div class="book-info">
+                            <span class="marker">Title: </span><span>{{item.title}}</span>
+                        </div>
+                        <div class="book-info">
+                            <span class="marker">Authors: </span><span>{{item.authors}}</span>
+                        </div>
+                        <div class="book-image">
+                            <img [src]="item.thumbnail" alt="">
+                        </div>
+                        <div>
+                            <p *ngIf="shown === item.id">{{item.description}}</p>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" (click)="showDescription(item.id)" *ngIf="shown !== item.id">Show Description</button>
+                            <button class="btn btn-danger" (click)="showDescription()" *ngIf="shown === item.id">Hide Description</button>
+                        </div>
+        
+                        <div class="vote-buttons">
+                            <button class="btn btn-primary" (click)="vote('one', item.id)" [disabled]="selected.includes(item.id)">1</button>
+                            <button class="btn btn-warning" (click)="vote('two', item.id)" [disabled]="selected.includes(item.id)">2</button>
+                            <button class="btn btn-success" (click)="vote('three', item.id)" [disabled]="selected.includes(item.id)">3</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4">
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <div *ngIf="votes.three" class="voted">
+                        <span class="voted-title"><b>3 Points:</b> {{votes.three.title}}</span><span class="remove" (click)="remove('three')">X</span>
+                    </div>
+                    <div *ngIf="votes.two" class="voted">
+                        <span class="voted-title"><b>2 Points:</b> {{votes.two.title}}</span><span class="remove" (click)="remove('two')">X</span>
+                    </div>
+                    <div *ngIf="votes.one" class="voted">
+                        <span class="voted-title"> <b>1 Point:</b> {{votes.one.title}}</span><span class="remove" (click)="remove('one')">X</span>
+                    </div>
+                    <div *ngIf="selected.length === 3">
+                        <button class="btn btn-primary" (click)="submit()">Submit Votes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

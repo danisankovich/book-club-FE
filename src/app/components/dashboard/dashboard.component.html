@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <label for="search"></label>
+            <input type="text" name="search" id="search" placeholder="Search Titles" class="search-input" [(ngModel)]="searchTerm">
+            <button class="btn btn-primary" (click)="search()">Search</button>
+        </div>
+    </div>
+    <div class='row' *ngIf="!shown">
+        <div *ngFor="let item of list" class="book col-md-4 col-sm-6" (click)="showBook(item)" (enter)="showBook(item)">
+            <div class="pad">
+                <div class="book-info">
+                    <span class="marker">Title: </span><span>{{item.volumeInfo.title}}</span>
+                </div>
+                <div class="book-info">
+                    <span class="marker">Authors: </span><span>{{item.volumeInfo.authors}}</span>
+                </div>
+                <div class="book-image">
+                    <img [src]="item.volumeInfo.imageLinks.thumbnail" alt="">
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div *ngIf="shown" class="description row">
+        <div class="col-md-8 offset-md-1 col-sm-8 offset-sm-2">
+            <div class="book-info">
+                <span class="marker">Title: </span><span>{{shown.volumeInfo.title}}</span>
+            </div>
+            <div class="book-info">
+                <span class="marker">Authors: </span><span>{{shown.volumeInfo.authors}}</span>
+            </div>
+            <div class="book-image">
+                <img [src]="shown.volumeInfo.imageLinks.thumbnail" alt="">
+            </div>
+            <p>{{shown.volumeInfo.description}}</p>
+            <button class="btn btn-danger" (click)="close()">Close</button>
+            <button class="btn btn-primary" (click)="pitch(shown)">Pitch</button>
+        </div>
+
+    </div>
+</div>

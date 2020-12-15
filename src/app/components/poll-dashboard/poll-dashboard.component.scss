@@ -1,0 +1,50 @@
+.book {
+
+    .pad {
+        border: 1px solid black;
+        text-align: center;
+        padding: 8px;
+        margin: 8px;
+
+    }
+}
+.marker {
+    font-weight: 700;
+}
+.book-info {
+    font-size: 22px;
+}
+.book-image {
+    padding: 12px;
+}
+
+.description {
+    background-color: white;
+    height: 100%;
+    padding: 24px;
+}
+
+.vote-buttons {
+    button {
+        margin: 4px;
+    }
+}
+
+.booklist {
+    margin-top: 12px;
+    border-right: 1px solid black;
+}
+
+.voted {
+    .voted-title {
+        font-size: 18px;
+    }
+
+    .remove {
+        font-size: 18px;
+        margin: 4px;
+        color: red;
+        font-weight: 700;
+        cursor: pointer;
+    }
+}
