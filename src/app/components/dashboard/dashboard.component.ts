@@ -10,6 +10,8 @@ export class DashboardComponent implements OnInit {
   public list = [];
   public shown = null;
   public searchTerm = '';
+  submitter = '';
+  meetingId = '';
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
@@ -37,6 +39,8 @@ export class DashboardComponent implements OnInit {
       authors: item.volumeInfo.authors.join(', '),
       thumbnail: item.volumeInfo.imageLinks.thumbnail,
       description: item.volumeInfo.description,
+      user: this.submitter,
+      meetingId: this.meetingId,
     }
     const confirmed = confirm(`Do you wish to submit ${bookInfo.title} for the next meeting? This will overwrite any previous submission you made.`)
     if (confirmed) {

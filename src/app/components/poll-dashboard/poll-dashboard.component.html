@@ -1,7 +1,13 @@
 <div class="container-fluid">
     <div class="row">
-
-        <div class="col-sm-8 col-md-8 booklist">
+        <div *ngIf="!meeting" class="meeting-search col-sm-12 col-md-12">
+            <input type="text" placeholder="meetingId" [(ngModel)]="meetingId">
+            <button class="btn btn-primary" (click)="submitMeetingId()">Search</button>
+        </div>
+        <div class="meeting-date col-sm-12 col-md-12" *ngIf="meeting">
+            <h2>Meeting Date: {{meeting.meetingDate}}</h2>
+        </div>
+        <div class="col-sm-8 col-md-8 booklist" *ngIf="meeting">
             <div class="row">
                 <div *ngFor="let item of items; let i = index" class="book col-md-6 col-sm-6">
                     <div class="pad">
@@ -33,7 +39,7 @@
         </div>
         <div class="col-sm-4 col-md-4">
             <div class="row">
-                <div class="col-sm-12 col-md-12">
+                <div class="col-sm-12 col-md-12 vote-section">
                     <div *ngIf="votes.three" class="voted">
                         <span class="voted-title"><b>3 Points:</b> {{votes.three.title}}</span><span class="remove" (click)="remove('three')">X</span>
                     </div>
@@ -44,7 +50,8 @@
                         <span class="voted-title"> <b>1 Point:</b> {{votes.one.title}}</span><span class="remove" (click)="remove('one')">X</span>
                     </div>
                     <div *ngIf="selected.length === 3">
-                        <button class="btn btn-primary" (click)="submit()">Submit Votes</button>
+                        <input type="text" placeholder="Discord Username" [(ngModel)]="user">
+                        <button class="btn btn-primary" (click)="submit()" [disabled]="!user">Submit Votes</button>
                     </div>
                 </div>
             </div>

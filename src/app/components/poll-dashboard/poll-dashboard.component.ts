@@ -10,6 +10,9 @@ export class PollDashboardComponent implements OnInit {
   public items = [];
   public selected = [];
   public shown = null;
+  public meetingId = '';
+  public meeting = null;
+  public user = '';
   public votes = {
     one: null,
     two: null,
@@ -18,13 +21,19 @@ export class PollDashboardComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
-    this.api.get('poll').subscribe((e: any) => {
-      this.items = e;
-    })
+
+  }
+
+  submitMeetingId() {
+    this.api.get('meeting', this.meetingId).subscribe((e: any) => {
+      this.meeting = e;
+      this.items = e.pitches;
+    });
   }
 
   showDescription(index?) {
     this.shown = index;
+    console.log(this.shown)
   }
 
   vote(number, id) {
@@ -41,13 +50,13 @@ export class PollDashboardComponent implements OnInit {
   }
 
   remove(number) {
-    const index = this.selected.indexOf(this.votes[number]);
+    const index = this.selected.indexOf(this.votes[number].id);
     this.selected.splice(index, 1);
     this.votes[number] = null;
   }
 
   submit() {
-    this.api.post('vote', this.votes).subscribe(e => {
+    this.api.post('vote', {votes: this.votes, user: this.user, meetingId: this.meetingId}).subscribe(e => {
       console.log(e)
     })
   }

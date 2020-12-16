@@ -34,8 +34,10 @@
                 <img [src]="shown.volumeInfo.imageLinks.thumbnail" alt="">
             </div>
             <p>{{shown.volumeInfo.description}}</p>
+            <input type="text" placeholder="Discord Name" [(ngModel)]="submitter">
+            <input type="text" placeholder="Meeting ID" [(ngModel)]="meetingId">
+            <button class="btn btn-primary" (click)="pitch(shown)" [disabled]='!submitter || !submitter.length || !meetingId || !meetingId.length'>Pitch</button>
             <button class="btn btn-danger" (click)="close()">Close</button>
-            <button class="btn btn-primary" (click)="pitch(shown)">Pitch</button>
         </div>
 
     </div>
