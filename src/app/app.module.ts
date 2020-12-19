@@ -12,13 +12,15 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ApiService } from './services/api/api.service';
 import { HeaderComponent } from './components/header/header.component';
 import { PollDashboardComponent } from './components/poll-dashboard/poll-dashboard.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     HeaderComponent,
-    PollDashboardComponent
+    PollDashboardComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
