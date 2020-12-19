@@ -7,9 +7,18 @@
                 </div>
             </div>
             <div class="row">
+                <div>
+                    <div class="col-md-12">
+                        <label for="search"></label>
+                        <input type="date" name="meetingDate" id="search" class="search-input" [(ngModel)]="meetingDate">
+                        <button class="btn btn-primary" (click)="newMeeting()" [disabled]="!meetingDate">Create Meeting</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-sm-12 col-md-12">
                     <div class="meetings" *ngFor="let meeting of meetings">
-                        <a (click)="show(meeting._id)">{{meeting.meetingDate}}</a>
+                        <a (click)="show(meeting._id)"><b>{{meeting.meetingDate}}:</b> (Meeting ID: <b>{{meeting.meetingId}}</b>)</a>
                         <div *ngIf="shown === meeting._id">
                             <div *ngFor="let pitch of meeting.pitches">
                                 <b>{{pitch.title}}</b> (pitched by: {{pitch.user}}) (votes: {{votes[pitch.id]}})
